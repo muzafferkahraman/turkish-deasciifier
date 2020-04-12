@@ -6,12 +6,14 @@ ThisBuild / organization     := "me.ekahraman"
 ThisBuild / name             := "turkish-deasciifier"
 
 lazy val core = project in file("core")
-lazy val app = (project in file("app"))
+lazy val app = project
+  .in(file("app"))
   .dependsOn(core)
   .settings(
     libraryDependencies ++=
         circeDependencies ++
-        catsDependencies
+        catsDependencies,
+    mainClass in assembly := Some("turkish.DeasciifierApp")
   )
 
 ThisBuild / scalacOptions ++= Seq(
